@@ -17,8 +17,8 @@ public class Person {
     private String fio;
     @Column(length = 2)
     private String gender;
-    public Integer getIdPerson() { return id_person; }
-    public void setIdPerson(Integer id_person) { this.id_person = id_person; }
+    public Integer getId_person() { return id_person; }
+    public void setId_person(Integer idPerson) { this.id_person = idPerson; }
 
     public String getFio() { return fio; }
     public void setFio(String fio) { this.fio = fio; }
