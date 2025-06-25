@@ -1,6 +1,7 @@
 <h2>Пункты переливания</h2>
 <table border="1">
   <tr>
+    <th>ID_пункта</th>
     <th>Город</th>
     <th>Адрес</th>
     <th>Телефон</th>
@@ -8,10 +9,11 @@
     <th>Удалить</th>
   </tr>
   <tr *ngFor="let point of points">
+    <td>{{ point.id_point }}</td>
     <td>{{ point.city }}</td>
     <td>{{ point.address }}</td>
     <td>{{ point.phone }}</td>
     <td>{{ point.fioHeader }}</td>
-    <td><button (click)="deletePoint(point.idPoint)">Удалить</button></td>
+    <td><button (click)="deletePoint(point.id_point)">Удалить</button></td>
   </tr>
 </table>

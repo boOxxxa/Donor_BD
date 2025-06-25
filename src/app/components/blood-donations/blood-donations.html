@@ -1,0 +1,19 @@
+<h2>BloodDonations</h2>
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID_donations</th>
+      <th>Дата Донации</th>
+      <th>id_пункта</th>
+      <th>id_донора</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bloodDonation of bloodDonations">
+      <td>{{ bloodDonation.id_donation }}</td>
+      <td>{{ bloodDonation.donation_date }}</td>
+      <td>{{ bloodDonation.id_point.idPoint }}</td>
+      <td>{{ bloodDonation.id_donor.id_donor }}</td>
+    </tr>
+  </tbody>
+</table>

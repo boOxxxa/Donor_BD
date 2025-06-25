@@ -12,7 +12,7 @@ import { Point, PointService } from '../../services/point.service';
 export class PointComponent {
   points: Point[] = [];
   newPoint: Point = {
-    idPoint: 0,
+    id_point: 0,
     city: '',
     address: '',
     phone: '',
@@ -30,7 +30,7 @@ export class PointComponent {
   addPoint() {
     this.pointService.create(this.newPoint).subscribe(() => {
       this.loadPoints();
-      this.newPoint = { idPoint: 0, city: '', address: '', phone: '', fioHeader: '' };
+      this.newPoint = { id_point: 0, city: '', address: '', phone: '', fioHeader: '' };
     });
   }
 
