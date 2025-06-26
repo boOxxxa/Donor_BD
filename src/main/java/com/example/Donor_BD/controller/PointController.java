@@ -26,8 +26,10 @@ public class PointController {
     }
 
     @GetMapping("/{id}")
-    public Point getById(@PathVariable Integer id) {
-        return service.getById(id);
+    public ResponseEntity<Point> getById(@PathVariable Integer id) {
+        Point point = pointService.getById(id);
+        return ResponseEntity.ok(point);
+
     }
 
     @PostMapping

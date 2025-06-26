@@ -1,6 +1,7 @@
 package com.example.Donor_BD.controller;
 
 import com.example.Donor_BD.model.Person;
+import com.example.Donor_BD.model.Point;
 import com.example.Donor_BD.service.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,10 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public Person getById(@PathVariable Integer id) {
-        return service.getById(id);
+    public ResponseEntity<Person> getById(@PathVariable Integer id) {
+        Person person = personService.getById(id);
+        return ResponseEntity.ok(person);
+
     }
 
     @PostMapping

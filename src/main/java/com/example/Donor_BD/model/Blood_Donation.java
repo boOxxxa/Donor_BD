@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Blood_Donation {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_donation;
 
     private LocalDate donation_date;
@@ -28,8 +28,8 @@ public class Blood_Donation {
     public Integer getIdDonation() { return id_donation; }
     public void setIdDonation(Integer idDonation) { this.id_donation = idDonation; }
 
-    public LocalDate getDonationDate() { return donation_date; }
-    public void setDonationDate(LocalDate donationDate) { this.donation_date = donationDate; }
+    public LocalDate getDonation_date() { return donation_date; }
+    public void setDonation_date(LocalDate donationDate) { this.donation_date = donationDate; }
 
     public Point getIdPoint() { return id_point; }
     public void setIdPoint(Point id_point) { this.id_point = id_point; }

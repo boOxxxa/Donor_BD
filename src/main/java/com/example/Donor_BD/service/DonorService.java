@@ -30,8 +30,8 @@ public class DonorService {
     public Donor update(Integer id, Donor updatedDonor) {
         Donor donor = repository.findById(id).orElseThrow();
         donor.setIdPerson(updatedDonor.getIdPerson());
-        donor.setBloodType(updatedDonor.getBloodType());
-        donor.setRhFactor(updatedDonor.getRhFactor());
+        donor.setBlood_type(updatedDonor.getBlood_type());
+        donor.setRh_factor(updatedDonor.getRh_factor());
         return repository.save(donor);
     }
 

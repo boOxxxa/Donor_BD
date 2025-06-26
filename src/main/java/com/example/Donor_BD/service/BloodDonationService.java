@@ -29,7 +29,7 @@ public class BloodDonationService {
 
     public Blood_Donation update(Integer id, Blood_Donation updatedDonation) {
         Blood_Donation donation = repository.findById(id).orElseThrow();
-        donation.setDonationDate(updatedDonation.getDonationDate());
+        donation.setDonation_date(updatedDonation.getDonation_date());
         donation.setIdDonor(updatedDonation.getIdDonor());
         donation.setIdPoint(updatedDonation.getIdPoint());
         return repository.save(donation);

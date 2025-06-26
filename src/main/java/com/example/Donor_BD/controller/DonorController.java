@@ -24,8 +24,10 @@ public class DonorController {
     }
 
     @GetMapping("/{id}")
-    public Donor getById(@PathVariable Integer id) {
-        return service.getById(id);
+    public ResponseEntity<Donor> getById(@PathVariable Integer id) {
+        Donor donor = service.getById(id);
+        return ResponseEntity.ok(donor);
+
     }
 
     @PostMapping

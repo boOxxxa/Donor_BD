@@ -29,9 +29,9 @@ public class Donor {
     public Person getIdPerson() { return id_person; }
     public void setIdPerson(Person id_person) { this.id_person = id_person; }
 
-    public String getBloodType() { return blood_type; }
-    public void setBloodType(String bloodType) { this.blood_type = bloodType; }
+    public String getBlood_type() { return blood_type; }
+    public void setBlood_type(String bloodType) { this.blood_type = bloodType; }
 
-    public String getRhFactor() { return rh_factor; }
-    public void setRhFactor(String rhFactor) { this.rh_factor = rhFactor; }
+    public String getRh_factor() { return rh_factor; }
+    public void setRh_factor(String rhFactor) { this.rh_factor = rhFactor; }
 }
