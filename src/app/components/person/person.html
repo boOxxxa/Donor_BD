@@ -1,11 +1,34 @@
 <h2>Список персон</h2>
+<form *ngIf="!editMode" (ngSubmit)="addPerson()">
+  <input [(ngModel)]="newPerson.id_person" name="id" placeholder="ID пункта" required>
+  <input [(ngModel)]="newPerson.fio" name="fio" placeholder="ФИО" required>
+  <input [(ngModel)]="newPerson.gender" name="gender" placeholder="ПОЛ" required>
+  <button type="submit">Добавить</button>
+</form>
+<form *ngIf="editMode" (ngSubmit)="saveEdit()">
+  <input [(ngModel)]="editPerson!.fio"  name="fio" placeholder="ФИО" required>
+  <input [(ngModel)]="editPerson!.gender" name="gender" placeholder="Пол" required>
+  <button type="submit">Сохранить</button>
+</form>
+<h2>Поиск пункта переливания по ID</h2>
 
+
+<input [(ngModel)]="searchId" name="searchId" placeholder="Введите ID пункта">
+<button (click)="searchPerson()">Найти</button>
+
+<div *ngIf="foundPerson">
+  <h3>Найденный человек:</h3>
+  <p><strong>ID:</strong> {{ foundPerson.id_person }}</p>
+  <p><strong>ФИО:</strong> {{ foundPerson.fio }}</p>
+  <p><strong>Пол:</strong> {{ foundPerson.gender }}</p>
+</div>
 <table border="1" cellpadding="5" cellspacing="0">
   <thead>
     <tr>
       <th>ID</th>
       <th>ФИО</th>
       <th>Пол</th>
+      <th>Действия</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +36,10 @@
       <td>{{ person.id_person }}</td>
       <td>{{ person.fio }}</td>
       <td>{{ person.gender }}</td>
+      <td>
+        <button (click)="startEdit(person)">Редактировать</button>
+        <button (click)="deletePerson(person.id_person)">Удалить</button>
+      </td>
     </tr>
   </tbody>
 </table>

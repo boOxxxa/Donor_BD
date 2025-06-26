@@ -1,11 +1,35 @@
 <h2>Donors</h2>
+<form *ngIf="!editMode" (ngSubmit)="addDonor()">
+  <input [(ngModel)]="newDonor.id_donor" name="id" placeholder="ID Донора" required>
+  <input [(ngModel)]="newDonor.id_person.id_person" name="idP" placeholder="Id Человека" required>
+  <input [(ngModel)]="newDonor.blood_type" name="blood_type" placeholder="группа крови" required>
+  <input [(ngModel)]="newDonor.rh_factor" name="rh_factor" placeholder="Резус-фактор" required>
+  <button type="submit">Добавить</button>
+</form>
+<form *ngIf="editMode" (ngSubmit)="saveEdit()">
+  <input [(ngModel)]="editDonor!.blood_type"  name="blood_type" placeholder="группа крови" required>
+  <input [(ngModel)]="editDonor!.rh_factor" name="rh_factor" placeholder="Резус-фактор" required>
+  <button type="submit">Сохранить</button>
+</form>
+<input [(ngModel)]="searchId" name="searchId" placeholder="Введите ID донора">
+<button (click)="searchPerson()">Найти</button>
+
+<div *ngIf="foundDonor">
+  <h3>Найденный пункт:</h3>
+  <p><strong>ID:</strong> {{ foundDonor.id_donor }}</p>
+  <p><strong>ID человека:</strong> {{ foundDonor.id_person }}</p>
+  <p><strong>Пол:</strong> {{ foundDonor.blood_type }}</p>
+  <p><strong>Пол:</strong> {{ foundDonor.rh_factor }}</p>
+</div>
+
 <table border="1" cellpadding="5" cellspacing="0">
   <thead>
     <tr>
-      <th>ID_dono</th>
+      <th>ID_donor</th>
       <th>id_person</th>
       <th>Blood Type</th>
       <th>Rh Factor</th>
+      <th>Действие</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +38,10 @@
       <td>{{ donor.id_person.id_person }}</td>
       <td>{{ donor.blood_type }}</td>
       <td>{{ donor.rh_factor }}</td>
+      <td>
+        <button (click)="startEdit(donor)">Редактировать</button>
+        <button (click)="deleteDonor(donor.id_donor)">Удалить</button>
+      </td>
     </tr>
   </tbody>
 </table>

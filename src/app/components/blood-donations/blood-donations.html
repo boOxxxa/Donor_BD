@@ -1,4 +1,26 @@
 <h2>BloodDonations</h2>
+<form *ngIf="!editMode" (ngSubmit)="addDonation()">
+  <input [(ngModel)]="newDonation.id_donation" name="id" placeholder="ID переливания" required>
+  <input [(ngModel)]="newDonation.donation_date" name="data" placeholder="Дата" required>
+  <input [(ngModel)]="newDonation.id_point.idPoint" name="idP" placeholder="Id Пункта" required>
+  <input [(ngModel)]="newDonation.id_donor.id_donor" name="idD" placeholder="ID донора" required>
+  <button type="submit">Добавить</button>
+</form>
+<form *ngIf="editMode" (ngSubmit)="saveEdit()">
+  <input [(ngModel)]="editDonation!.donation_date"  name="data" placeholder="Дата" required>
+  <button type="submit">Сохранить</button>
+</form>
+<input [(ngModel)]="searchId" name="searchId" placeholder="Введите ID донации">
+<button (click)="searchDonation()">Найти</button>
+
+<div *ngIf="foundDonation">
+  <h3>Найденный пункт:</h3>
+  <p><strong>ID_donations:</strong> {{ foundDonation.id_donation }}</p>
+  <p><strong>Дата Донации:</strong> {{ foundDonation.donation_date }}</p>
+  <p><strong>id_пункта:</strong> {{ foundDonation.id_point.idPoint}}</p>
+  <p><strong>id_донора:</strong> {{ foundDonation.id_donor.id_donor }}</p>
+</div>
+
 <table border="1" cellpadding="5" cellspacing="0">
   <thead>
     <tr>
@@ -6,6 +28,7 @@
       <th>Дата Донации</th>
       <th>id_пункта</th>
       <th>id_донора</th>
+      <th>Действия</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +37,10 @@
       <td>{{ bloodDonation.donation_date }}</td>
       <td>{{ bloodDonation.id_point.idPoint }}</td>
       <td>{{ bloodDonation.id_donor.id_donor }}</td>
+      <td>
+        <button (click)="startEdit(bloodDonation)">Редактировать</button>
+        <button (click)="deleteDonation(bloodDonation.id_donation)">Удалить</button>
+      </td>
     </tr>
   </tbody>
 </table>

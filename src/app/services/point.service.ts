@@ -21,7 +21,9 @@ export class PointService {
   getAll(): Observable<Point[]> {
     return this.http.get<Point[]>(this.apiUrl);
   }
-
+  getById(id: number): Observable<Point> {
+    return this.http.get<Point>(`${this.apiUrl}/${id}`);;
+  }
   create(point: Point): Observable<Point> {
     return this.http.post<Point>(this.apiUrl, point);
   }

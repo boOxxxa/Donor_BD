@@ -11,12 +11,13 @@ import { PersonService, Person } from '../../services/person.service';
 })
 export class PersonComponent {
   persons: Person[] = [];
-  newPerson: Person = { id_person: 0, fio: '', gender: 'м' };
+  newPerson: Person = { id_person: 0, fio: '', gender: '' };
 
   constructor(private personService: PersonService) {
     this.loadPersons();
   }
-
+  editMode: boolean = false;
+  editPerson: Person | null = null;
   loadPersons() {
     
     this.personService.getAll().subscribe((data) => {this.persons = data; console.log(data)} );
@@ -25,11 +26,32 @@ export class PersonComponent {
   addPerson() {
     this.personService.create(this.newPerson).subscribe(() => {
       this.loadPersons();
-      this.newPerson = { id_person: 0, fio: '', gender: 'м' };
+      this.newPerson = { id_person: 0, fio: '', gender: '' };
     });
   }
 
   deletePerson(id: number) {
     this.personService.delete(id).subscribe(() => this.loadPersons());
+  }
+  startEdit(person: Person) {
+    this.editPerson = { ...person };
+    this.editMode = true;
+  }
+
+  saveEdit() {
+    if (!this.editPerson) return;
+    this.personService.update(this.editPerson.id_person, this.editPerson).subscribe(() => {
+      this.loadPersons();
+      this.editPerson = null;
+      this.editMode = false;
+    });
+  }
+  searchId: number = 0;
+  foundPerson: Person | null = null;
+  searchPerson() {
+    this.personService.getById(this.searchId).subscribe({
+      next: (data) => this.foundPerson = data,
+      error: () => this.foundPerson = null
+    });
   }
 }

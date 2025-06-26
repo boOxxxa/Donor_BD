@@ -16,9 +16,22 @@
   <input [(ngModel)]="editPoint!.phone" name="editPhone" placeholder="Телефон" required>
   <input [(ngModel)]="editPoint!.fioHeader" name="editFio" placeholder="ФИО заведующего" required>
   <button type="submit">Сохранить</button>
-  
-</form>
 
+</form>
+<h2>Поиск пункта переливания по ID</h2>
+
+
+<input [(ngModel)]="searchId" name="searchId" placeholder="Введите ID пункта">
+<button (click)="searchPoint()">Найти</button>
+
+<div *ngIf="foundPoint">
+  <h3>Найденный пункт:</h3>
+  <p><strong>ID:</strong> {{ foundPoint.id_point }}</p>
+  <p><strong>Город:</strong> {{ foundPoint.city }}</p>
+  <p><strong>Адрес:</strong> {{ foundPoint.address }}</p>
+  <p><strong>Телефон:</strong> {{ foundPoint.phone }}</p>
+  <p><strong>ФИО заведующего:</strong> {{ foundPoint.fioHeader }}</p>
+</div>
 <table border="1">
   <thead>
     <tr>

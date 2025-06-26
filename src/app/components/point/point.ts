@@ -54,4 +54,12 @@ saveEdit() {
 
   });
 }
+searchId: number = 0;
+foundPoint: Point | null = null;
+searchPoint() {
+  this.pointService.getById(this.searchId).subscribe({
+    next: (data) => this.foundPoint = data,
+    error: () => this.foundPoint = null
+  });
+}
 }

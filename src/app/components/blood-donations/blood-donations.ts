@@ -11,25 +11,86 @@ import { BloodDonation, BloodDonationService } from '../../services/bloodDonatio
 })
 export class DonationListComponent {
   bloodDonations: BloodDonation[] = [];
+  newDonation : BloodDonation={
+    id_donation:0,
+    donation_date:'',
+    id_point:{
+      idPoint:0,
+      city:'',
+      address:'',
+      phone:'',
+      fioHeader:''
+    },
+    id_donor:{
+      id_donor:0,
+    id_person: {
+      id_person: 0,
+      fio: '',
+      gender: ''
+    },
+    blood_type:'',
+    rh_factor:''
+    }
+
+  }
   
 
   constructor(private bloodDonationService: BloodDonationService) {
     this.loadBloodDonations();
   }
+  editMode: boolean = false;
+  editDonation: BloodDonation | null = null;
   loadBloodDonations() {
     this.bloodDonationService.getAll().subscribe(data => {
       this.bloodDonations = data;
     });
   }
 
-  /*addDonor() {
-    this.donorService.create(this.newDonor).subscribe(() => {
-      this.loadDonors();
-      this.newDonor = { id_donor: 0, id_person: '', blood_type: '', rh_factor: '', };
+  addDonation() {
+    this.bloodDonationService.create(this.newDonation).subscribe(() => {
+      this.loadBloodDonations();
+      {console.log(this.editDonation)}
+      this.newDonation = { id_donation: 0, donation_date: '', id_point:{
+        idPoint:0,
+        city:'',
+        address:'',
+        phone:'',
+        fioHeader:''
+      }, id_donor:{
+        id_donor:0,
+      id_person: {
+        id_person: 0,
+        fio: '',
+        gender: ''
+      },
+      blood_type:'',
+      rh_factor:''
+      } };
     });
-  }*/
-
-  deleteDonor(id: number) {
+  }
+  startEdit(donation: BloodDonation) {
+        this.editDonation = { ...donation };
+        this.editMode = true;
+      }
+    
+      saveEdit() {
+        if (!this.editDonation) return;
+        this.bloodDonationService.update(this.editDonation.id_donation, this.editDonation).subscribe(() => {
+          this.loadBloodDonations()
+          {console.log(this.editDonation)}
+          this.editDonation = null;
+          this.editMode = false;
+        });
+      }
+  deleteDonation(id: number) {
     this.bloodDonationService.delete(id).subscribe(() => this.loadBloodDonations());
   }
+  searchId: number = 0;
+    foundDonation: BloodDonation | null = null;
+     searchDonation() {
+      this.bloodDonationService.getById(this.searchId).subscribe({
+        next: (data) => this.foundDonation = data,
+        error: () => this.foundDonation = null
+      });
+      }
 }
