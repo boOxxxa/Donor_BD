@@ -37,4 +37,21 @@ export class PointComponent {
   deletePoint(id: number) {
     this.pointService.delete(id).subscribe(() => this.loadPoints());
   }
+  editMode: boolean = false;
+  editPoint: Point | null = null;
+  newPoint1: any = { id_point: 0, city: '', address: '', phone: '', fioHeader: '' };
+  startEdit(point: Point) {
+  this.editMode = true;
+  this.editPoint = { ...point };
+}
+
+saveEdit() {
+  if (!this.editPoint) return;
+  this.pointService.update(this.editPoint.id_point, this.editPoint).subscribe(() => {
+    this.loadPoints();
+    this.editPoint = null;
+    this.editMode = false;
+
+  });
+}
 }

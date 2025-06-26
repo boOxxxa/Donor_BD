@@ -29,4 +29,7 @@ export class PointService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  update(id: number, point: Point): Observable<Point> {
+    return this.http.put<Point>(`${this.apiUrl}/${id}`, point);
+  }
 }
