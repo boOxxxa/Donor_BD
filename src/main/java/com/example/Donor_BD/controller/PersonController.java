@@ -2,6 +2,8 @@ package com.example.Donor_BD.controller;
 
 import com.example.Donor_BD.model.Person;
 import com.example.Donor_BD.service.PersonService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,8 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/persons")
 @CrossOrigin(origins = "http://localhost:4200")
-public class PersonController {
 
+public class PersonController {
+    @Autowired
+    private PersonService personService;
     private final PersonService service;
 
     public PersonController(PersonService service) {
@@ -28,17 +32,20 @@ public class PersonController {
     }
 
     @PostMapping
-    public Person create(@RequestBody Person person) {
-        return service.save(person);
+    public ResponseEntity<Person> create(@RequestBody Person person) {
+        Person saved = personService.save(person);
+        return ResponseEntity.ok(saved);
     }
 
     @PutMapping("/{id}")
-    public Person update(@PathVariable Integer id, @RequestBody Person updated) {
-        return service.update(id, updated);
+    public ResponseEntity<Person> updatePerson(@PathVariable Integer id, @RequestBody Person updatedPerson) {
+        Person updated = personService.update(id, updatedPerson);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        service.delete(id);
+    public void delete (@PathVariable Integer id) {
+        personService.delete(id);
+        //return ResponseEntity.noContent().build();
     }
 }

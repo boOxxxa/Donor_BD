@@ -41,12 +41,8 @@ public class PointController {
         return service.update(id, updated);
     }
 
-    /*@DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePoint(@PathVariable Integer id) {
-        if (!pointRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        pointRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }*/
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) {
+        pointService.delete(id);
+    }
 }
